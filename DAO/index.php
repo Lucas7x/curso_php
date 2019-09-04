@@ -27,11 +27,16 @@
   echo $usuario;
   */
 
+/*
   //inserindo aluno
-  $aluno = new Usuario();
-  $aluno->setDeslogin("LEVI_GAY");
-  $aluno->setDessenha("qwert");
+  $hunter = new Usuario("gon_freecs","pedra");
 
-  $aluno->insert();
-  echo $aluno;
+  $hunter->insert();
+  echo $hunter;
+*/
+
+  $hunter = new Usuario();
+  $hunter->loadById(10);
+  $hunter->update("killua_zoldyc","relampago");
+  echo $hunter;
 ?>
