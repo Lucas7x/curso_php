@@ -1,6 +1,6 @@
 <?php
   class Usuario {
-    private $idUsuario;
+    private $idusuario;
     private $deslogin;
     private $dessenha;
     private $dtcadastro;
@@ -37,6 +37,13 @@
       $this->dtcadastro = $value;
     }
 
+    public function setData($data) {
+      $this->setIdusuario($data['idusuario']);
+      $this->setDeslogin($data['deslogin']);
+      $this->setDessenha($data['dessenha']);
+      $this->setDtcadastro(new DateTime($data['dtcadastro']));
+    }
+
     public function loadById($id) {
       $sql = new Sql();
       $results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", $arrayName = array(
@@ -44,12 +51,8 @@
       ));
 
       if (isset($results[0])) {
-        $row = $results[0];
+        $this->setData($results[0]);
 
-        $this->setIdusuario($row['idusuario']);
-        $this->setDeslogin($row['deslogin']);
-        $this->setDessenha($row['dessenha']);
-        $this->setDtcadastro(new DateTime($row['dtcadastro']));
       }
     }
 
@@ -74,14 +77,35 @@
       ));
 
       if (isset($results[0])) {
-        $row = $results[0];
+        $this->setData($results[0]);
 
-        $this->setIdusuario($row['idusuario']);
-        $this->setDeslogin($row['deslogin']);
-        $this->setDessenha($row['dessenha']);
-        $this->setDtcadastro(new DateTime($row['dtcadastro']));
       } else {
         throw new Exception("Login ou senha inválidos.");
+      }
+
+    }
+
+/*
+INSERT INTO `tb_usuarios`(`deslogin`, `dessenha`) VALUES ("testeInsert","qwert" )
+SELECT * FROM `tb_usuarios` WHERE idusuario = LAST_INSERT_ID()
+
+*/
+    public function insert() {
+      $sql = new Sql();
+      $sql->query(
+        "INSERT INTO tb_usuarios (deslogin, dessenha) VALUES (:LOGIN, :PASSWORD)",//;
+        //SELECT * FROM tb_usuarios WHERE idusuario = LAST_INSERT_ID()",
+        array(
+          ":LOGIN" => $this->getDeslogin(),
+          ":PASSWORD" => $this->getDessenha()
+        )
+      );
+
+      //TESTE RETORNAR ULTIMO INSERIDO
+      $results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = LAST_INSERT_ID()");
+
+      if (isset($results[0])) {
+        $this->setData($results[0]);
 
       }
 

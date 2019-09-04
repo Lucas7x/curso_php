@@ -20,9 +20,18 @@
   echo json_encode($search);
   */
 
+  /*
   //carrega um usuario usando o login e setDessenha
   $usuario = new Usuario();
-  $usuario->login("roota","qwerty");
+  $usuario->login("roota  ","qwerty");
   echo $usuario;
+  */
 
+  //inserindo aluno
+  $aluno = new Usuario();
+  $aluno->setDeslogin("LEVI_GAY");
+  $aluno->setDessenha("qwert");
+
+  $aluno->insert();
+  echo $aluno;
 ?>
