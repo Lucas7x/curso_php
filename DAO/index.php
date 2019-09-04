@@ -35,8 +35,15 @@
   echo $hunter;
 */
 
+/*
   $hunter = new Usuario();
   $hunter->loadById(10);
   $hunter->update("killua_zoldyc","relampago");
+  echo $hunter;
+*/
+
+  $hunter = new Usuario();
+  $hunter->loadById(5);
+  $hunter->delete();
   echo $hunter;
 ?>
