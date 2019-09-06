@@ -20,20 +20,20 @@
   echo json_encode($search);
   */
 
-  /*
+/*
   //carrega um usuario usando o login e setDessenha
   $usuario = new Usuario();
   $usuario->login("roota  ","qwerty");
   echo $usuario;
-  */
+*/
 
-/*
+
   //inserindo aluno
-  $hunter = new Usuario("gon_freecs","pedra");
+  $hunter = new Usuario("kurapica","corrente");
 
   $hunter->insert();
   echo $hunter;
-*/
+
 
 /*
   $hunter = new Usuario();
@@ -42,8 +42,11 @@
   echo $hunter;
 */
 
+/*
   $hunter = new Usuario();
   $hunter->loadById(5);
   $hunter->delete();
   echo $hunter;
+*/
+
 ?>

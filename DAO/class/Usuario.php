@@ -92,6 +92,12 @@ SELECT * FROM `tb_usuarios` WHERE idusuario = LAST_INSERT_ID()
 */
     public function insert() {
       $sql = new Sql();
+      $results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+        ":LOGIN"=>$this->getDeslogin(),
+        ":PASSWORD"=>$this->getDessenha()
+      ));
+
+      /*
       $sql->query(
         "INSERT INTO tb_usuarios (deslogin, dessenha) VALUES (:LOGIN, :PASSWORD)",//;
         //SELECT * FROM tb_usuarios WHERE idusuario = LAST_INSERT_ID()",
@@ -103,8 +109,9 @@ SELECT * FROM `tb_usuarios` WHERE idusuario = LAST_INSERT_ID()
 
       //TESTE RETORNAR ULTIMO INSERIDO
       $results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = LAST_INSERT_ID()");
+      */
 
-      if (isset($results[0])) {
+      if (count($results) > 0) {
         $this->setData($results[0]);
 
       }
